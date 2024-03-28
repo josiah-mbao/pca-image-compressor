@@ -4,10 +4,10 @@
 This project implements Principal Component Analysis (PCA) for compressing images. PCA is a dimensionality reduction technique that can be applied to images to reduce their size while preserving important information. In this project, we use PCA to compress images and evaluate the trade-offs between compression ratio and image quality.
 
 ## Key Takeaways and Lessons learned
-..* To undertake this project, I had to learn the fundamentals of linear algebra. I improved my understanding on linear transformations, covariance matrices, eigenvalues and eigenvectors.
-..*  I brushed up my knowledge on statistical and machine learning concepts around covariance, feature extraction and dimension reduction.
-..* I leveraged python libraries that made certain computations more efficient.
-..* I learnt a bit about the basics of image processing.
+1. To undertake this project, I had to learn the fundamentals of linear algebra. I improved my understanding on linear transformations, covariance matrices, eigenvalues and eigenvectors.
+2. I brushed up my knowledge on statistical and machine learning concepts around covariance, feature extraction and dimension reduction.
+3. I leveraged python libraries that made certain computations more efficient.
+4. I learnt a bit about the basics of image processing.
 
 ## Requirements
 Python 3.0 and above
@@ -37,14 +37,14 @@ python compress_images.py
 4. Compressed images will be saved in the output/ directory.
 
 ## Configuration
-..* compress_images.py: Main script for compressing images.
-..* utils.py: Contains helper functions for image processing and PCA.
+1. compress_images.py: Main script for compressing images.
+2. utils.py: Contains helper functions for image processing and PCA.
 
 ## Parameters
-..* num_components: Number of principal components to retain during compression. Higher ..* values preserve more image detail but result in larger file sizes.
-..* input_dir: Directory containing input images.
-..* output_dir: Directory to save compressed images.
-..* image_format: Output image format (e.g., JPEG, PNG).
+1. num_components: Number of principal components to retain during compression. Higher ..* values preserve more image detail but result in larger file sizes.
+2. input_dir: Directory containing input images.
+3. output_dir: Directory to save compressed images.
+4. image_format: Output image format (e.g., JPEG, PNG).
 
 ## Results
 ..* A comparison of image quality vs. compression ratio for different numbers of principal components.
