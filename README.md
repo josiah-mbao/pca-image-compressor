@@ -17,7 +17,7 @@ Scikit learn libraries
 ## Installation
 Clone this repository:
 ```python
-git clone https://github.com/your_username/pca-image-compression.git
+git clone https://github.com/josiah-mbao/pca-image-compression.git
 ```
 Install dependencies:
 ```python
