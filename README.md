@@ -47,8 +47,8 @@ python compress_images.py
 4. image_format: Output image format (e.g., JPEG, PNG).
 
 ## Results
-..* A comparison of image quality vs. compression ratio for different numbers of principal components.
-..* Visual examples of original vs. compressed images.
+..* A comparison of an image before and after compression. It uses 2 principal components.
+![Image compressed using dimension reduction aka. PCA](https://github.com/josiah-mbao/pca-image-compressor/blob/main/compressed%20output.png?raw=true)
 
 ## Acknowledgements
 ..* This project was developed for a university assignment for a Numerical Analysis course, instructed by Dr.J. Owino.
