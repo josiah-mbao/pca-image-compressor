@@ -39,12 +39,15 @@ def compress_image(image_path, num_components=50, target_size=(100, 100)):
     # Reshape the image to its original shape
     reconstructed_image = reconstructed_image.reshape(original_shape)
 
+    # Convert float values to range [0, 255] and cast to integers
+    reconstructed_image = (reconstructed_image * 255).astype(np.uint8)
+
     # Save the compressed image
-    io.imsave(output_path, reconstructed_image.astype(np.uint8))
+    io.imsave(output_path, reconstructed_image)
 
     return reconstructed_image
 
-def plot_images(original_image, compressed_image):
+def plot_images(original_image, compressed_image,  output_plot_path='output/plot.png'):
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
     axes[0].imshow(original_image)
     axes[0].set_title('Original Image')
@@ -52,7 +55,9 @@ def plot_images(original_image, compressed_image):
     axes[1].imshow(compressed_image)
     axes[1].set_title('Compressed Image')
     axes[1].axis('off')
-    plt.show()
+    # Save the plot to a file instead of showing it
+    plt.savefig(output_plot_path)
+    plt.close()  # Close the plot so it doesn't block execution
 
 # this is the "if name=main()" section of the program. Or the script-executable part 
 
