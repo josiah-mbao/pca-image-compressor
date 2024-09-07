@@ -10,11 +10,14 @@
 <body>
     <div class="container">
         <h1>PCA Image Compression</h1>
+
+        <!-- Form to upload and compress image -->
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="image" required>
             <input type="submit" value="Upload and Compress">
         </form>
 
+        <!-- Show download link for the compressed image if available -->
         {% if filename %}
         <div>
             <h3>Download your compressed image:</h3>
@@ -22,11 +25,13 @@
         </div>
         {% endif %}
 
-        {% if compressed_image %}
+        <!-- Show the compressed image and plot if available -->
+        {% if compressed_image is not none %}
         <h3>Compressed Image</h3>
-        <img src="{{ url_for('static', filename='output/' + compressed_image) }}" alt="Compressed Image">
+        <img src="{{ url_for('serve_output_file', filename=compressed_image) }}" alt="Compressed Image">
+        
         <h3>Image Compression Plot</h3>
-        <img src="{{ url_for('static', filename='output/' + plot) }}" alt="Compression Plot">
+        <img src="{{ url_for('serve_output_file', filename=plot) }}" alt="Compression Plot">
         {% endif %}
     </div>
 </body>

@@ -4,23 +4,22 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from skimage import io, transform
 
-def compress_image(image_path, num_components=50, target_size=(100, 100)):
+def compress_image(image_path, num_components=50, target_size=(100, 100), output_path='output/compressed_img.png'):
     # Loads the image
     image = io.imread(image_path)
 
-    # Resizes the image, so all the images have the same num of features.
+    # Resizes the image
     image_resized = transform.resize(image, target_size, anti_aliasing=True)
 
     # Check if image is grayscale or color
     if len(image_resized.shape) == 3:  # Color image
-        # Reshape image to a 2D array (flatten)
         original_shape = image_resized.shape
         image_resized = image_resized.reshape((-1, original_shape[2]))
     elif len(image_resized.shape) == 2:  # Grayscale image
         original_shape = image_resized.shape
         image_resized = image_resized.reshape((-1, 1))
 
-    # Convert to float and normalize the data
+    # Normalize the data
     scaler = StandardScaler()
     normalized_image = scaler.fit_transform(image_resized.astype(np.float64))
 
@@ -35,17 +34,16 @@ def compress_image(image_path, num_components=50, target_size=(100, 100)):
 
     # Reconstruct the image
     reconstructed_image = pca.inverse_transform(compressed_image)
-
-    # Reshape the image to its original shape
     reconstructed_image = reconstructed_image.reshape(original_shape)
 
-    # Convert float values to range [0, 255] and cast to integers
+    # Convert float values to range [0, 255]
     reconstructed_image = (reconstructed_image * 255).astype(np.uint8)
 
     # Save the compressed image
     io.imsave(output_path, reconstructed_image)
 
-    return reconstructed_image
+    return output_path
+
 
 def plot_images(original_image, compressed_image,  output_plot_path='output/plot.png'):
     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
@@ -60,14 +58,14 @@ def plot_images(original_image, compressed_image,  output_plot_path='output/plot
     plt.close()  # Close the plot so it doesn't block execution
 
 # this is the "if name=main()" section of the program. Or the script-executable part 
+if __name__ == "__main__":
+    image_path = '/Users/josiah/Desktop/The Off Season Project/PCA Image Compression/images/manu_logo.png'
+    output_path = '/Users/josiah/Desktop/The Off Season Project/PCA Image Compression/output/compressed_img.png'
+    num_components = 3
+    target_size = (100, 100)
+    compressed_image_path = compress_image(image_path, num_components=num_components, target_size=target_size, output_path=output_path)
 
-image_path = '/Users/josiah/Desktop/The Off Season Project/PCA Image Compression/images/manu_logo.png'  # Path to the image
-output_path = '/Users/josiah/Desktop/The Off Season Project/PCA Image Compression/output/compressed_img.png'
-num_components = 3  # Number of principal components
-target_size = (100, 100)  # Target size for resizing the images
-compressed_image = compress_image(image_path, num_components=num_components, target_size=target_size)
-
-if compressed_image is not None:
-    original_image = io.imread(image_path)
-    plot_images(original_image, compressed_image)
-
+    if compressed_image_path is not None:
+        original_image = io.imread(image_path)
+        compressed_image = io.imread(compressed_image_path)
+        plot_images(original_image, compressed_image)
